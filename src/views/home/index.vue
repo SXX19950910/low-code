@@ -46,6 +46,7 @@ export default {
 <style lang="scss">
 .yl-design-warp {
   height: 100%;
+  background-color: $lightBackground;
   .header-area {
     background-color: #0079F2;
     height: 60px;
@@ -92,8 +93,10 @@ export default {
       }
       .el-icon-circle-plus-outline {
         font-size: 48px;
+        color: $skyBlue;
       }
       span {
+        color: $skyBlue;
         font-size: 14px;
         margin-top: 5px;
       }
@@ -122,6 +125,7 @@ export default {
           }
         }
         .left {
+          border-right: 1px solid $skyBlue;
         }
       }
     }

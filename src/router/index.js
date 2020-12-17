@@ -10,17 +10,17 @@ const router = new Router({
             component: () => import('@/views/home/index.vue'),
             hidden: true,
             meta: {
-                title: '低代码设计'
+                title: '低代码平台'
             },
             children: [
-                // {
-                //     path: 'edit',
-                //     name: 'DesignEdit',
-                //     component: () => import('@/views/setting/design/lowCode/index.vue'),
-                //     meta: {
-                //         title: '页面设计'
-                //     }
-                // },
+                {
+                    path: 'edit',
+                    name: 'DesignEdit',
+                    component: () => import('@/views/edit/index.vue'),
+                    meta: {
+                        title: '页面设计'
+                    }
+                },
                 // {
                 //     path: 'template',
                 //     name: 'DesignTemplate',

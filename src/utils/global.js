@@ -4,6 +4,27 @@ export function generateId() {
   return Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)
 }
 
+export function updateFormItemId(updateData) {
+  const isLayout = type => ['grid', 'buttonDrawer'].includes(type)
+  const data = _.cloneDeep(updateData)
+  data.elementId = generateId()
+  const set = (children) => {
+    children.map((item, index) => {
+      item.elementId = `${item.elementId}${index}`
+    })
+  }
+  if (isLayout(data.type)) {
+    data.field.children.map((item, index) => {
+      item.elementId = `${item.elementId}${index}`
+      item.parentId = `${data.elementId}`
+      if (item.children && item.children.length > 0) {
+        set(item.children)
+      }
+    })
+  }
+  return data
+}
+
 const getFormItemEventsOptions = (type) => {
   const result = {
     input: [

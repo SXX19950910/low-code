@@ -11,6 +11,9 @@
         <i class="el-icon-close" />
       </div>
     </div>
+    <div class="bottom-tools">
+      <div class="name item">{{ field.type }}</div>
+    </div>
     <component :is="`${field.type}Item`" ref="item" :data="field" />
   </div>
 </template>
@@ -27,16 +30,20 @@ import checkboxItem from './checkbox'
 import timeItem from './time'
 import gridItem from './grid'
 import textareaItem from './textarea'
-import addressBookItem from './addressBook'
 import dateAreaItem from './dateArea'
 import buttonItem from './button'
-import configTableItem from './configTable'
-import buttonDrawerItem from './buttonDrawer'
+import formLayoutItem from './formLayout'
+import scmNavItem from '@/scm/components/nav'
+import containerItem from './container'
+import carouselItem from './carousel'
 import _ from 'loadsh'
 import { updateFormItemId } from '@/utils/global'
 export default {
   components: {
     dateItem,
+    containerItem,
+    carouselItem,
+    scmNavItem,
     inputItem,
     chooseItem,
     selectItem,
@@ -46,11 +53,9 @@ export default {
     timeItem,
     gridItem,
     textareaItem,
-    addressBookItem,
     dateAreaItem,
     buttonItem,
-    configTableItem,
-    buttonDrawerItem
+    formLayoutItem
   },
   props: {
     elementId: {
@@ -120,14 +125,26 @@ export default {
     border: 1px dashed $border;
     margin-bottom: 2px;
     position: relative;
-    background-color: white;
     transition: background-color .2s ease;
+    z-index: 1;
     &:hover {
       background-color: $light-blue;
     }
     &.active {
-      border: 1px solid $skyBlue;
+      &:after {
+        content: '';
+        position: absolute;
+        width: calc(100% + 1px);
+        height: calc(100% + 1px);
+        top: 0;
+        left: 0;
+        border: 1px solid $skyBlue;
+        border-radius: 2px;
+      }
       & > .right-tools {
+        display: block;
+      }
+      & > .bottom-tools {
         display: block;
       }
     }
@@ -168,6 +185,23 @@ export default {
       }
       &:hover {
         opacity: 1;
+      }
+    }
+    .bottom-tools {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      display: none;
+      z-index: 100;
+      opacity: .8;
+      .item {
+        &.name {
+          background-color: $skyBlue;
+          padding: 4px;
+          color: white;
+          font-size: 12px;
+          border-top-right-radius: 2px;
+        }
       }
     }
     &.hide-drag {

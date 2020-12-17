@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import ylDrawer from '@/ylCommon/components/Drawer'
+import ylDrawer from '@/components/Drawer'
 import { debounce } from 'throttle-debounce'
 import { mapMutations } from 'vuex'
-import { parseFuncInstance } from '../utils/event'
+import { parseFuncInstance } from '@/utils/event'
 import vueEditor from 'vue-monaco'
 export default {
   components: {

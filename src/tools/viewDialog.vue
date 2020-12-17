@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ylGenerateForm from '@/ylCommon/components/GenerateForm'
+import ylGenerateForm from '@/components/LowCode'
 export default {
   components: {
     ylGenerateForm

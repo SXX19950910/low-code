@@ -1,5 +1,3 @@
-import { generateId } from '@/utils/global'
-
 const state = {
   form: [],
   collection: [],
@@ -30,9 +28,11 @@ const state = {
 }
 
 const actions = {
-  async init({ commit }) {
+  async init() {
+    //
   },
-  async getRules({ commit }) {
+  async getRules() {
+    //
   }
 }
 const mutations = {
