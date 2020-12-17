@@ -75,7 +75,7 @@
 <script>
 import _ from 'loadsh'
 import { mapGetters, mapMutations } from 'vuex'
-import { generateOpenUrlFunc } from '../utils/event'
+import { generateOpenUrlFunc } from '@/utils/event'
 import vueEditor from 'vue-monaco'
 export default {
   components: {

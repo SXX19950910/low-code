@@ -80,11 +80,8 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import request from '@/ylCommon/utils/request'
-import draggable from 'vuedraggable'
 export default {
   components: {
-    draggable
   },
   data() {
     return {
@@ -146,16 +143,6 @@ export default {
       const isApi = this.current.field.api.includes('.do')
       const params = JSON.parse(this.current.field.params)
       if (isApi && params) {
-        const res = await request({ url: this.current.field.api, data: params })
-        if (res.data && res.data.length > 0) {
-          const data = res.data.map(item => {
-            return {
-              label: item.name,
-              value: item.id
-            }
-          })
-          this.setFormItemOption({ id: this.current.field.elementId, data })
-        }
       }
     },
     handleAddOption() {

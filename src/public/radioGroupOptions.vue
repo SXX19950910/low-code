@@ -61,11 +61,8 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import draggable from 'vuedraggable'
-
 export default {
   components: {
-    draggable
   },
   data() {
     return {

@@ -1,5 +1,5 @@
 import _ from 'loadsh'
-import { getTransformFun } from '../utils/event'
+import { getTransformFun } from '@/utils/event'
 import Vue from 'vue'
 
 const hasChild = data => data.field ? data.field.children.length > 0 : data.children.length > 0

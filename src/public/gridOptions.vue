@@ -44,7 +44,7 @@
 import _ from 'loadsh'
 import draggable from 'vuedraggable'
 import { mapGetters, mapMutations } from 'vuex'
-import { generateId } from '../utils/global'
+import { generateId } from '@/utils/global'
 export default {
   components: {
     draggable

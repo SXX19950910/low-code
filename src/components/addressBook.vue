@@ -16,8 +16,8 @@
 
 <script>
 import addressBookDialog from '@/public/yl-addressBook/Index.vue'
-import { parseStyles } from '../utils/style'
-import { transformFun } from '../utils/event'
+import { parseStyles } from '@/utils/style'
+import { transformFun } from '@/utils/event'
 export default {
   components: {
     addressBookDialog

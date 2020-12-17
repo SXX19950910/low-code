@@ -15,9 +15,9 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.css'
-import { parseStyles } from '../../utils/style'
+import { parseStyles } from '@/utils/style'
 import { mapGetters, mapMutations } from 'vuex'
-import { formatFormItem, removeAllNonItem } from '../../utils/global'
+import { formatFormItem, removeAllNonItem } from '@/utils/global'
 import _ from 'loadsh'
 export default {
   components: {

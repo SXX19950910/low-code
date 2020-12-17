@@ -86,12 +86,10 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import draggable from 'vuedraggable'
 import request from '@/ylCommon/utils/request'
 export default {
   name: 'ChooseOptions',
   components: {
-    draggable
   },
   data() {
     return {

@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import { parseStyles } from '../../../utils/style'
+import { parseStyles } from '@/utils/style'
 import draggable from 'vuedraggable'
-import { formatFormItem, removeAllNonItem } from '../../../utils/global'
+import { formatFormItem, removeAllNonItem } from '@/utils/global'
 import _ from 'loadsh'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
