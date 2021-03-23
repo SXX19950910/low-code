@@ -1,3 +1,5 @@
+import components from './../../components/Maps/index'
+import { objToArr } from './../../utils/utils'
 const state = {
   form: [],
   collection: [],
@@ -28,8 +30,38 @@ const state = {
 }
 
 const actions = {
-  async init() {
-    //
+  formatComponents() {
+    const advanced = {
+      title: '高级组件',
+      components: []
+    }
+    const web = {
+      title: '门户组件',
+      components: []
+    }
+    const basic = {
+      title: '基础组件',
+      components: []
+    }
+    const map = {
+      advanced,
+      web,
+      basic
+    }
+    const collection = []
+    components.map(item => {
+      map[item.classify].components.push(item)
+      collection.push(item)
+    })
+    return {
+      componentsArr: objToArr(map),
+      collection
+    }
+  },
+  async init({ commit }) {
+    const { componentsArr, collection } = actions.formatComponents()
+    commit('SET_COLLECTION', collection)
+    return componentsArr
   },
   async getRules() {
     //

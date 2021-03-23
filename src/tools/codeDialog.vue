@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     json() {
-      return JSON.stringify(this.$store.state.form.form, null, '\t')
+      return JSON.stringify(this.$store.state.lowCode.form, null, '\t')
     }
   },
   methods: {

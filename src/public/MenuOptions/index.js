@@ -1,0 +1,40 @@
+/**
+ * @name: index
+ * @author: shixiaoxi
+ * @date: 2021-03-16 16:25
+ * @description：index
+ * @update: 2021-03-16 16:25
+ */
+import buttonDrawerOptions from './ButtonDrawer'
+import eventOptions from './Event'
+import dataOptions from './Data'
+import pageOptions from './Page'
+import styleOptions from './Style'
+import pageStyle from './PageStyle'
+
+export default [
+    {
+        name: 'button-drawer-options',
+        component: buttonDrawerOptions
+    },
+    {
+        name: 'event-options',
+        component: eventOptions
+    },
+    {
+        name: 'data-options',
+        component: dataOptions
+    },
+    {
+        name: 'page-options',
+        component: pageOptions
+    },
+    {
+        name: 'style-options',
+        component: styleOptions
+    },
+    {
+        name: 'page-style',
+        component: pageStyle
+    }
+]

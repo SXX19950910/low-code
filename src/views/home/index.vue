@@ -1,13 +1,13 @@
 <template>
   <div class="yl-design-warp">
-    <template v-if="$route.name !== 'DesignEdit'">
+    <template v-if="$route.name !== 'Edit'">
       <div class="header-area">
         <div class="left-logo">
           <span class="first-font">云搭</span>
           <span class="describe">云路低代码开发平台</span>
         </div>
       </div>
-      <div v-if="$route.name === 'Design'" class="content-area">
+      <div v-if="$route.name === 'Home'" class="content-area">
         <div class="create-box">
           <i class="el-icon-circle-plus-outline" />
           <span>创建模板</span>
@@ -34,10 +34,10 @@ export default {
   },
   methods: {
     handleGoCreate() {
-      this.$router.push({ name: 'DesignEdit' })
+      this.$router.push({ name: 'Edit' })
     },
     handleGoTemplate() {
-      this.$router.push({ name: 'DesignTemplate' })
+      this.$router.push({ name: 'Template' })
     }
   }
 }

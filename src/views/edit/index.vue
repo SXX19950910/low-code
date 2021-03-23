@@ -23,8 +23,8 @@
             <el-scrollbar class="left-scroll-area">
               <div v-for="item in originalList" :key="item.title" class="classify-box">
                 <div class="sub-title">{{ item.title }}</div>
-                <div v-for="tag in item.list" :key="tag.elementId" :class="tag.id === currentId ? 'current' : ''" class="item none-item" :field-id="tag.id" @click="handleComponentClick(tag)">
-                  <span class="name" :title="tag.label">{{ tag.label }}</span>
+                <div v-for="tag in item.components" :key="tag.id" :class="tag.id === currentId ? 'current' : ''" class="item none-item" :field-id="tag.id" @click="handleComponentClick(tag)">
+                  <span class="name" :title="tag.name">{{ tag.name }}</span>
                   <i class="el-icon-caret-left" />
                 </div>
               </div>
@@ -33,12 +33,12 @@
               <div v-for="item in originalList" :key="item.title" class="classify-box">
                 <div class="sub-title">{{ item.title }}</div>
                 <draggable v-bind="leftDragOptions" @start="onStart">
-                  <div v-for="tag in item.list" :id="tag.id" :key="tag.elementId" class="item none-item" :field-id="tag.id">
-                    <div class="top-left-title">{{ tag.label }} {{ tag.type }}</div>
+                  <div v-for="tag in item.components" :id="tag.id" :key="tag.id" class="item none-item" :field-id="tag.id">
+                    <div class="top-left-title">{{ tag.name }} {{ tag.type }}</div>
                     <div class="wrapper-item">
                       <i :class="tag.icon" />
-                      <span class="name" :title="tag.label">
-                        {{ tag.label }}
+                      <span class="name" :title="tag.name">
+                        {{ tag.name }}
                       </span>
                     </div>
                   </div>
@@ -69,8 +69,8 @@
         <img src="@/assets/images/design.png" alt="png">
         <p>请将左侧字段拖入此处</p>
       </div>
-      <draggable v-model="$store.state.form.form" tag="div" class="middle-form-content" :style="warpStyles" :class="boardClass" v-bind="middleDragOptions" @add="onFieldAdd" @click.native.stop="handleSelectPage">
-        <drag-component v-for="item in $store.state.form.form" :ref="item.elementId" :key="item.elementId" :element-id="item.elementId" :field="item" :active="item.active" @delete="onDelete" />
+      <draggable v-model="$store.state.lowCode.form" tag="div" class="middle-form-content" :style="warpStyles" :class="boardClass" v-bind="middleDragOptions" @add="onFieldAdd" @click.native.stop="handleSelectPage">
+        <drag-component v-for="item in $store.state.lowCode.form" :ref="item.elementId" :key="item.elementId" :element-id="item.elementId" :field="item" :active="item.active" @delete="onDelete" is-dev />
       </draggable>
     </div>
     <div class="right-options-warp">
@@ -83,7 +83,7 @@
           </el-tab-pane>
           <el-tab-pane name="styles" label="样式">
             <el-scrollbar class="options-area">
-              <page-styles />
+              <page-style />
             </el-scrollbar>
           </el-tab-pane>
           <el-tab-pane name="events" label="事件" />
@@ -129,7 +129,6 @@
       </el-tabs>
     </div>
     <code-dialog ref="code" />
-    <view-dialog ref="view" />
     <script-panel ref="script" />
     <data-source ref="data" />
   </div>
@@ -141,63 +140,17 @@ import draggable from 'vuedraggable'
 import { formatFormItem, removeAllNonItem, generateId } from '@/utils/global'
 import { parseStyles } from '@/utils/style'
 import { mapGetters, mapMutations } from 'vuex'
-import dragField from '@/components/Preview/drag.vue'
 import codeDialog from '@/tools/codeDialog'
-import viewDialog from '@/tools/viewDialog'
-import eventOptions from '@/public/eventOptions'
-import dataOptions from '@/public/dataOptions'
-import timeOptions from '@/public/timeOptions'
-import dateOptions from '@/public/dateOptions'
-import gridOptions from '@/public/gridOptions'
-import inputOptions from '@/public/inputOptions'
-import chooseOptions from '@/public/chooseOptions'
-import selectOptions from '@/public/selectOptions'
-import groupOptions from '@/public/groupOptions'
-import radioGroupOptions from '@/public/radioGroupOptions'
-import checkboxOptions from '@/public/checkboxOptions'
-import textareaOptions from '@/public/textareaOptions'
-import dateAreaOptions from '@/public/dateAreaOptions'
-import buttonOptions from '@/public/buttonOptions'
-import styleOptions from '@/public/styleOptions'
 import fieldTree from '@/tools/fieldTree'
-import formLayoutOptions from '@/public/formLayoutOptions'
-import pageOptions from '@/public/pageOptions'
 import scriptPanel from '@/tools/scriptPanel'
-import pageStyles from '@/public/pageStyles'
 import dataSource from '@/tools/dataSource'
-import scmNavOptions from '@/scm/options/nav'
-import containerOptions from '@/public/containerOptions'
-import carouselOptions from '@/public/carouselOptions'
 import _ from 'loadsh'
 export default {
   components: {
-    pageStyles,
     draggable,
-    viewDialog,
-    dragField,
     codeDialog,
     fieldTree,
-    timeOptions,
-    scmNavOptions,
-    containerOptions,
-    dateOptions,
-    gridOptions,
-    inputOptions,
-    chooseOptions,
-    selectOptions,
-    groupOptions,
-    radioGroupOptions,
-    carouselOptions,
-    checkboxOptions,
-    textareaOptions,
-    dateAreaOptions,
-    buttonOptions,
-    styleOptions,
-    eventOptions,
-    dataOptions,
-    formLayoutOptions,
     scriptPanel,
-    pageOptions,
     dataSource
   },
   data() {
@@ -222,7 +175,7 @@ export default {
       return parseStyles(this.pageStyles, this.pageProps)
     },
     placeVisible() {
-      return (this.$store.state.form.form && this.$store.state.form.form.length < 1) && (!this.pageStyles.backgroundImage && !this.pageStyles.backgroundColor)
+      return (this.$store.state.lowCode.form && this.$store.state.lowCode.form.length < 1) && (!this.pageStyles.backgroundImage && !this.pageStyles.backgroundColor)
     },
     leftDragOptions() {
       return {
@@ -255,10 +208,10 @@ export default {
       return this.currentFormItem.type === 'page'
     },
     currentOptions() {
-      return `${this.currentFormItem.type}-options`
+      return this.currentFormItem.menuName
     },
     formOptions() {
-      return this.$store.state.form.options
+      return this.$store.state.lowCode.options
     }
   },
   created() {
@@ -385,6 +338,7 @@ export default {
         index: newIndex,
         field: newField
       }
+      console.log(formItem)
       this.addFormItem(formItem)
     },
     handleSelectPage() {
@@ -440,7 +394,7 @@ export default {
       this.setCssTag()
     },
     getFormItemRules() {
-      this.$store.dispatch('form/getRules')
+      this.$store.dispatch('lowCode/getRules')
     },
     setCssTag() {
       let styleTag = document.getElementById('yl-form-style')
@@ -452,55 +406,8 @@ export default {
       document.head.appendChild(styleTag)
     },
     async getLeftComponents() {
-      await this.$store.dispatch('form/init')
-      const components = this.collection
-      const specialArr = ['textarea', 'addressBook']
-      const collection = [
-        {
-          title: '输入框',
-          list: components.filter(item => item.type === 'input' && !item.key.includes('(基础)'))
-        },
-        {
-          title: '选择框',
-          list: components.filter(item => item.type === 'select' && !item.key.includes('(基础)'))
-        },
-        {
-          title: '选项组',
-          list: components.filter(item => item.type === 'choose' && !item.key.includes('(基础)'))
-        },
-        {
-          title: '单选按钮',
-          list: components.filter(item => item.type === 'radioGroup' && !item.key.includes('(基础)'))
-        },
-        {
-          title: '时间框',
-          list: components.filter(item => item.type === 'date' && !item.key.includes('(基础)'))
-        },
-        {
-          title: '特殊',
-          list: components.filter(item => specialArr.includes(item.type) && !item.key.includes('(基础)'))
-        }
-      ]
-      collection.map(item => this.componentList.push(item))
-      const origin = [
-        {
-          title: '云路官网',
-          list: components.filter(item => item.key.includes('(云路)'))
-        },
-        {
-          title: '布局组件',
-          list: components.filter(item => item.key.includes('(布局)'))
-        },
-        {
-          title: '基础组件',
-          list: components.filter(item => item.key.includes('(基础)'))
-        },
-        {
-          title: '高级组件',
-          list: components.filter(item => item.key.includes('(高级)'))
-        }
-      ]
-      origin.map(item => this.originalList.push(item))
+      const res = await this.$store.dispatch('lowCode/init')
+      this.originalList = res
     },
     handleShowJsPanel() {
       this.$refs.script.init()
@@ -515,8 +422,11 @@ export default {
 #low-code-warp {
   display: flex;
   height: 100vh;
-  overflow: hidden;
   border-bottom: 1px solid $border;
+  overflow: auto;
+  // 左侧菜单宽328px + 右侧菜单宽300px
+  min-width: 100vw;
+  width: 100%;
   .left-edge-bar {
     width: 48px;
     flex-shrink: 0;
@@ -722,6 +632,8 @@ export default {
   }
   .middle-form-warp {
     width: 100%;
+    min-width: 1280px;
+    position: relative;
     .top-fun-area {
       height: 40px;
       width: 100%;

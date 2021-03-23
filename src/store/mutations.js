@@ -5,17 +5,17 @@ import Vue from 'vue'
 const hasChild = data => data.field ? data.field.children.length > 0 : data.children.length > 0
 export default {
   ADD_FORM_ITEM(state, { field, index }) {
-    state.form.form.splice(index, 0, field)
+    state.lowCode.form.splice(index, 0, field)
   },
   INIT_FORM(state, { items, css }) {
-    state.form.form = items
-    state.form.page.css = css
+    state.lowCode.form = items
+    state.lowCode.page.css = css
   },
   SET_CURRENT_FORM_ITEM(state, data) {
-    state.form.current = data
+    state.lowCode.current = data
   },
   SET_FORM_ITEM_OPTION(state, update) {
-    const current = state.form.current
+    const current = state.lowCode.current
     const { id = current.elementId, data } = update
     const set = (children) => {
       children.map(item => {
@@ -35,7 +35,7 @@ export default {
     })
   },
   ADD_FORM_ITEM_OPTION(state, data) {
-    const current = state.form.current
+    const current = state.lowCode.current
     const add = (children) => {
       children.map(item => {
         if (item.elementId === current.elementId) {
@@ -45,7 +45,7 @@ export default {
         }
       })
     }
-    state.form.form.map(item => {
+    state.lowCode.form.map(item => {
       if (item.elementId === current.elementId) {
         item.field.options.push(data)
       } else if (item.field.children.length > 0) {
@@ -54,7 +54,7 @@ export default {
     })
   },
   DELETE_FORM_ITEM_OPTION(state, data) {
-    const current = state.form.current
+    const current = state.lowCode.current
     const remove = (children) => {
       children.map(item => {
         if (item.elementId === current.elementId) {
@@ -68,7 +68,7 @@ export default {
         }
       })
     }
-    state.form.form.map((item) => {
+    state.lowCode.form.map((item) => {
       if (item.elementId === current.elementId) {
         item.field.options.map((tag, tagIndex) => {
           if (tag.label === data.label) {
@@ -94,7 +94,7 @@ export default {
         }
       })
     }
-    state.form.form.map((item) => {
+    state.lowCode.form.map((item) => {
       if (item.elementId === parentId) {
         item.field.children.map(tag => {
           if (tag.elementId === gridId) {
@@ -118,7 +118,7 @@ export default {
         }
       })
     }
-    state.form.form.map((item) => {
+    state.lowCode.form.map((item) => {
       if (item.elementId === parentId) {
         item.field.children.splice(index, 0, field)
       } else if (hasChild(item)) {
@@ -135,7 +135,7 @@ export default {
         }
       })
     }
-    state.form.form.map((item, index) => {
+    state.lowCode.form.map((item, index) => {
       if (item.elementId === elementId) state.form.form.splice(index, 1)
       else if (hasChild(item)) {
         remove(item.field.children)
@@ -154,7 +154,7 @@ export default {
         }
       })
     }
-    state.form.form.map(item => {
+    state.lowCode.form.map(item => {
       if (item.elementId === parentId) {
         item.field.children.push(newFormItem)
       } else if (hasChild(item)) {
@@ -174,15 +174,15 @@ export default {
         }
       })
     }
-    deleteFormItem(state.form.form)
+    deleteFormItem(state.lowCode.form)
   },
   CLEAR_FORM(state) {
-    state.form.form = []
-    state.form.current = {}
+    state.lowCode.form = []
+    state.lowCode.current = {}
   },
   SET_FORM_ITEM_RULE(state, id) {
-    const rule = _.cloneDeep(state.form.rules.find(item => item.attrName === id)) || { attrName: '', desc: '', maxLimit: '', maxLimitMsg: '', minLimit: '', minLimitMsg: '', regular: '', regularMsg: '', required: '', requiredMsg: '', status: '', type: '' }
-    const current = state.form.current
+    const rule = _.cloneDeep(state.lowCode.rules.find(item => item.attrName === id)) || { attrName: '', desc: '', maxLimit: '', maxLimitMsg: '', minLimit: '', minLimitMsg: '', regular: '', regularMsg: '', required: '', requiredMsg: '', status: '', type: '' }
+    const current = state.lowCode.current
     const setRule = (children) => {
       children.map(item => {
         const hasChildren = item.children && item.children.length > 0
@@ -192,7 +192,7 @@ export default {
         } else if (hasChildren) setRule(item.children)
       })
     }
-    state.form.form.map(item => {
+    state.lowCode.form.map(item => {
       const isRight = item.elementId === current.elementId
       const hasChildren = item.field.children && item.field.children.length > 0
       if (isRight) {
@@ -214,7 +214,7 @@ export default {
         } else if (hasChildren) copy(item.children)
       })
     }
-    state.form.form.map((item, index) => {
+    state.lowCode.form.map((item, index) => {
       const isRight = item.elementId === elementId
       if (isRight) {
         currentIndex = index + 1
@@ -235,7 +235,7 @@ export default {
         }
       })
     }
-    state.form.form.map(item => {
+    state.lowCode.form.map(item => {
       const isRight = item.elementId === parentId
       if (isRight) {
         item.field.children.splice(index, 0, field)
@@ -263,7 +263,7 @@ export default {
         }
       })
     }
-    state.form.form.map(item => {
+    state.lowCode.form.map(item => {
       const isRight = id === item.elementId
       if (isRight) {
         const hasEvent = item.field.events.some(e => e.trigger === event.trigger)
@@ -286,22 +286,22 @@ export default {
     const y = local.keyArr[1]
     const xValue = local.valueArr[0]
     const yValue = local.valueArr[1]
-    state.form.page.styles.top = ''
-    state.form.page.styles.left = ''
-    state.form.page.styles.bottom = ''
-    state.form.page.styles.right = ''
-    state.form.page.styles[x] = xValue
-    state.form.page.styles[y] = yValue
+    state.lowCode.page.styles.top = ''
+    state.lowCode.page.styles.left = ''
+    state.lowCode.page.styles.bottom = ''
+    state.lowCode.page.styles.right = ''
+    state.lowCode.page.styles[x] = xValue
+    state.lowCode.page.styles[y] = yValue
   },
   SET_PAGE_STYLES(state, { key, value }) {
-    if (!state.form.page.styles.hasOwnProperty(key)) {
+    if (!state.lowCode.page.styles.hasOwnProperty(key)) {
       Vue.set(state.form.page.styles, key, value)
     } else {
       state.form.page.styles[key] = value
     }
   },
   SET_PAGE_PROPS(state, { key, value }) {
-    if (!state.form.page.props.hasOwnProperty(key)) {
+    if (!state.lowCode.page.props.hasOwnProperty(key)) {
       Vue.set(state.form.page.props, key, value)
     } else {
       state.form.page.props[key] = value
@@ -325,7 +325,7 @@ export default {
         }
       })
     }
-    state.form.form.map(item => {
+    state.lowCode.form.map(item => {
       const isRight = id === item.elementId
       if (isRight) {
         for (const key in object) {
@@ -360,7 +360,7 @@ export default {
         }
       })
     }
-    state.form.form.map(item => {
+    state.lowCode.form.map(item => {
       const isRight = id === item.elementId
       if (isRight) {
         for (const key in object) {
@@ -382,22 +382,22 @@ export default {
     methods.map(item => {
       func[item.funcName] = getTransformFun(item.funcBody, item.funcName)
     })
-    state.form.page.methods = func
-    state.form.methodsList = methods
+    state.lowCode.page.methods = func
+    state.lowCode.methodsList = methods
   },
   ADD_SOURCE_ITEM(state, source) {
-    state.form.sourceList.push(source)
+    state.lowCode.sourceList.push(source)
   },
   ADD_FETCH_ITEM(state, fetch) {
-    state.form.fetchList.push(fetch)
+    state.lowCode.fetchList.push(fetch)
   },
   DELETE_FETCH_ITEM(state, fetch) {
-    state.form.fetchList.map((item, index) => {
+    state.lowCode.fetchList.map((item, index) => {
       if (item.name === fetch.name) state.form.fetchList.splice(index, 1)
     })
   },
   DELETE_SOURCE_ITEM(state, source) {
-    state.form.sourceList.map((item, index) => {
+    state.lowCode.sourceList.map((item, index) => {
       if (item.name === source.name) state.form.sourceList.splice(index, 1)
     })
   }
