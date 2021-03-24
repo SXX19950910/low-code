@@ -7,8 +7,10 @@
  */
 import buttonDrawer from './ButtonDrawer'
 import webNav from './WebNav'
+import grid from './Grid'
 
 export default [
     buttonDrawer,
-    webNav
+    webNav,
+    grid
 ]

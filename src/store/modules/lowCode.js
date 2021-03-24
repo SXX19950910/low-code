@@ -1,5 +1,5 @@
-import components from './../../components/Maps/index'
-import { objToArr } from './../../utils/utils'
+import components from '@/components/Maps/index'
+import { objToArr } from '@/utils/utils'
 const state = {
   form: [],
   collection: [],
@@ -43,10 +43,15 @@ const actions = {
       title: '基础组件',
       components: []
     }
+    const layout = {
+      title: '布局组件',
+      components: []
+    }
     const map = {
       advanced,
       web,
-      basic
+      basic,
+      layout
     }
     const collection = []
     components.map(item => {

@@ -51,7 +51,8 @@ export default {
             },
             methods: {
                 ...mapMutations({
-                    insertComponent: 'INSERT_COMPONENT'
+                    insertComponent: 'INSERT_COMPONENT',
+                    setCurrentComponent: 'SET_CURRENT_COMPONENT'
                 }),
                 parseStyles(style, props) {
                     return parseStyles(style, props)

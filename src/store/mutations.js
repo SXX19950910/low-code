@@ -31,7 +31,7 @@ export default {
     state.lowCode.form = items
     state.lowCode.page.css = css
   },
-  SET_CURRENT_FORM_ITEM(state, data) {
+  SET_CURRENT_COMPONENT(state, data) {
     state.lowCode.current = data
   },
   SET_FORM_ITEM_OPTION(state, update) {

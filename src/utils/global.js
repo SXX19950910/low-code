@@ -185,7 +185,39 @@ export function formatFormItem(field) {
     type: ''
   }
   newField.field.ruleName = ''
-  newField.field.children = newField.type === 'grid' ? [{ icon: 'iconfont icon42danlanbuju', label: '单栏', parentId: newField.elementId, span: 12, elementId: `${generateId()}1`, children: [] }, { icon: 'iconfont icon42danlanbuju', label: '单栏', parentId: newField.elementId, span: 12, elementId: `${generateId()}2`, children: [] }] : []
+  const createChildren = (type) => {
+    let result = []
+    switch (type) {
+      case 'grid':
+        result = [
+          {
+            icon: 'iconfont icon42danlanbuju',
+            label: '单栏',
+            parentId: newField.elementId,
+            span: 12,
+            elementId: `${generateId()}1`,
+            field: {
+              props: {},
+              styles: {},
+              children: []
+            }
+          },
+          {
+            icon: 'iconfont icon42danlanbuju',
+            label: '单栏',
+            parentId: newField.elementId,
+            span: 12,
+            elementId: `${generateId()}2`,
+            field: {
+              children: []
+            }
+          }
+        ]
+        break
+    }
+    return result
+  }
+  newField.field.children = createChildren(newField.field.type)
   const propsKeyMap = [
     {
       key: 'className',

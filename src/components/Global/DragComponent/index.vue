@@ -22,12 +22,14 @@
 import { mapGetters, mapMutations } from 'vuex'
 import buttonDrawer from '@/components/Maps/ButtonDrawer/index.vue'
 import webNav from '@/components/Maps/WebNav/index.vue'
+import grid from '@/components/Maps/Grid/index.vue'
 import _ from 'loadsh'
 
 export default {
   components: {
     buttonDrawer,
-    webNav
+    webNav,
+    grid
   },
   props: {
     elementId: {

@@ -1,5 +1,5 @@
 <template>
-  <draggable v-model="data.field.children" v-bind="dragOptions" class="draggable-wrap" :class="data.field.children.length < 1 ? 'no-field' : ''" :data-parent="data.elementId" @add="onAdd">
+  <draggable v-model="data.field.children" v-bind="dragOptions" :tag="tag" class="draggable-wrap" :component-data="componentData" :class="data.field.children.length < 1 ? 'no-field' : ''" :data-parent="data.elementId" @add="onAdd">
     <drag-component v-for="(component) in data.field.children" :key="component.elementId" :field="component" :element-id="component.elementId" />
   </draggable>
 </template>
@@ -18,6 +18,16 @@ export default {
       default() {
         return {}
       }
+    },
+    componentData: {
+      type: Object,
+      default() {
+        return {}
+      }
+    },
+    tag: {
+      type: String,
+      default: 'div'
     }
   },
   data() {
