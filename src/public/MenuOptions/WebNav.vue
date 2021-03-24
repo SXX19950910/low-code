@@ -37,17 +37,9 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
 export default {
   components: {},
-  props: {
-    field: {
-      type: Object,
-      default() {
-        return {}
-      }
-    }
-  },
+  props: {},
   data() {
     return {
       typeOptions: [
@@ -67,33 +59,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['designForm', 'currentFormItem']),
-    current() {
-      const { elementId = '' } = this.currentFormItem
-      let result
-      const hasChild = data => data.field ? data.field.children.length > 0 : data.children.length > 0
-      const findChildren = (children) => {
-        children.map(item => {
-          if (item.elementId === elementId) result = item
-          else if (hasChild(item)) {
-            findChildren(item.field ? item.field.children : item.children)
-          }
-        })
-      }
-      this.designForm.map(item => {
-        if (item.elementId === elementId) {
-          result = item
-        } else if (item.field.children.length > 0) {
-          findChildren(item.field.children)
-        }
-      })
-      return result
-    }
   },
   methods: {
-    ...mapMutations({
-      getFormItemRule: 'SET_FORM_ITEM_RULE'
-    })
   }
 }
 </script>

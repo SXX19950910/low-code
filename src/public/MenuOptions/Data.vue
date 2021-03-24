@@ -128,27 +128,6 @@ export default {
       return {
         animation: 200
       }
-    },
-    current() {
-      const { elementId = '' } = this.currentFormItem
-      let result
-      const hasChild = data => data.field ? data.field.children.length > 0 : data.children.length > 0
-      const findChildren = (children) => {
-        children.map(item => {
-          if (item.elementId === elementId) result = item
-          else if (hasChild(item)) {
-            findChildren(item.field ? item.field.children : item.children)
-          }
-        })
-      }
-      this.designForm.map(item => {
-        if (item.elementId === elementId) {
-          result = item
-        } else if (item.field.children.length > 0) {
-          findChildren(item.field.children)
-        }
-      })
-      return result
     }
   },
   methods: {

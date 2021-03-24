@@ -1,9 +1,29 @@
-import _ from 'loadsh'
 import { getTransformFun } from '@/utils/event'
 import Vue from 'vue'
 
 const hasChild = data => data.field ? data.field.children.length > 0 : data.children.length > 0
+const findCall = (list, key, value, callback) => {
+  list.map(item => {
+    if (item[key] === value) {
+      callback(item)
+    } else if (hasChild(item)) {
+      findCall(item.field.children, key, value, callback)
+    }
+  })
+}
+
 export default {
+  INSERT_COMPONENT(state, field) {
+    const { parentId, index } = field
+    if (!parentId) {
+      state.lowCode.form.splice(index, 0, field)
+    } else {
+      findCall(state.lowCode.form, 'elementId', parentId, (res) => {
+        res.field.children.push(field)
+      })
+    }
+
+  },
   ADD_FORM_ITEM(state, { field, index }) {
     state.lowCode.form.splice(index, 0, field)
   },
@@ -80,53 +100,7 @@ export default {
       }
     })
   },
-  ADD_FORM_ITEM_TO_GRID(state, { parentId, gridId, field, index }) {
-    const set = (children) => {
-      children.map(item => {
-        if (item.elementId === parentId) {
-          item.field.children.map(child => {
-            if (child.elementId === gridId) {
-              child.children.splice(index, 0, field)
-            }
-          })
-        } else if (hasChild(item)) {
-          set(item.field ? item.field.children : item.children)
-        }
-      })
-    }
-    state.lowCode.form.map((item) => {
-      if (item.elementId === parentId) {
-        item.field.children.map(tag => {
-          if (tag.elementId === gridId) {
-            tag.children.splice(index, 0, field)
-          } else if (hasChild(item)) {
-            set(item.field ? item.field.children : item.children)
-          }
-        })
-      } else if (hasChild(item)) {
-        set(item.field.children)
-      }
-    })
-  },
-  ADD_FORM_ITEM_TO_FORM(state, { parentId, field, index }) {
-    const addField = (list) => {
-      list.map(item => {
-        if (item.elementId === parentId) {
-          item.field.children.splice(index, 0, field)
-        } else if (hasChild(item)) {
-          addField(item.field ? item.field.children : item.children)
-        }
-      })
-    }
-    state.lowCode.form.map((item) => {
-      if (item.elementId === parentId) {
-        item.field.children.splice(index, 0, field)
-      } else if (hasChild(item)) {
-        addField(item.field ? item.field.children : item.children)
-      }
-    })
-  },
-  DELETE_FORM_ITEM(state, elementId) {
+  DELETE_COMPONENT(state, elementId) {
     const remove = (list) => {
       list.map((item, index) => {
         if (item.elementId === elementId) list.splice(index, 1)
@@ -136,71 +110,15 @@ export default {
       })
     }
     state.lowCode.form.map((item, index) => {
-      if (item.elementId === elementId) state.form.form.splice(index, 1)
+      if (item.elementId === elementId) state.lowCode.form.splice(index, 1)
       else if (hasChild(item)) {
         remove(item.field.children)
       }
     })
   },
-  ADD_FORM_ITEM_TO_CHILDREN(state, formItem) {
-    const newFormItem = _.cloneDeep(formItem)
-    const parentId = formItem.parentId
-    const add = (children) => {
-      children.map(item => {
-        if (item.elementId === parentId) {
-          item.field.children.push(newFormItem)
-        } else if (hasChild(item)) {
-          add(item.field ? item.field.children : item.children)
-        }
-      })
-    }
-    state.lowCode.form.map(item => {
-      if (item.elementId === parentId) {
-        item.field.children.push(newFormItem)
-      } else if (hasChild(item)) {
-        add(item.field ? item.field.children : item.children)
-      }
-    })
-  },
-  DELETE_FORM_ITEM_TO_CHILDREN(state, { parentId, elementId }) {
-    const deleteFormItem = (children) => {
-      children.map(item => {
-        if (item.elementId === parentId) {
-          item.field.children.map((child, childIndex) => {
-            if (child.elementId === elementId) item.field.children.splice(childIndex, 1)
-          })
-        } else if (hasChild(item)) {
-          deleteFormItem(item.field ? item.field.children : item.children)
-        }
-      })
-    }
-    deleteFormItem(state.lowCode.form)
-  },
   CLEAR_FORM(state) {
     state.lowCode.form = []
     state.lowCode.current = {}
-  },
-  SET_FORM_ITEM_RULE(state, id) {
-    const rule = _.cloneDeep(state.lowCode.rules.find(item => item.attrName === id)) || { attrName: '', desc: '', maxLimit: '', maxLimitMsg: '', minLimit: '', minLimitMsg: '', regular: '', regularMsg: '', required: '', requiredMsg: '', status: '', type: '' }
-    const current = state.lowCode.current
-    const setRule = (children) => {
-      children.map(item => {
-        const hasChildren = item.children && item.children.length > 0
-        const isRight = item.elementId === current.elementId
-        if (isRight) {
-          item.field.rule = rule
-        } else if (hasChildren) setRule(item.children)
-      })
-    }
-    state.lowCode.form.map(item => {
-      const isRight = item.elementId === current.elementId
-      const hasChildren = item.field.children && item.field.children.length > 0
-      if (isRight) {
-        item.field.rule = rule
-      } else if (hasChildren) {
-        setRule(item.field.children)
-      }
-    })
   },
   COPY_FORM_ITEM(state, { elementId, field }) {
     let currentIndex
@@ -221,26 +139,6 @@ export default {
         state.form.form.splice(currentIndex, 0, field)
       } else if (hasChild(item)) {
         copy(item.field ? item.field.children : item.children)
-      }
-    })
-  },
-  ADD_DRAWER_FORM_ITEM(state, { parentId, field, index }) {
-    const set = (list) => {
-      list.map(item => {
-        const isRight = item.elementId === parentId
-        if (isRight) {
-          item.field.children.splice(index, 0, field)
-        } else if (hasChild(item)) {
-          set(item.field ? item.field.children : item.children)
-        }
-      })
-    }
-    state.lowCode.form.map(item => {
-      const isRight = item.elementId === parentId
-      if (isRight) {
-        item.field.children.splice(index, 0, field)
-      } else if (hasChild(item)) {
-        set(item.field ? item.field.children : item.children)
       }
     })
   },

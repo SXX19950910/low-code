@@ -7,7 +7,6 @@ const getters = {
   formOptions: state => state.lowCode.options,
   styleActives: state => state.lowCode.styleActives,
   collection: state => state.lowCode.collection,
-  pageMethods: state => state.lowCode.page.methods,
   methodsList: state => state.lowCode.methodsList,
   sourceList: state => state.lowCode.sourceList,
   fetchList: state => state.lowCode.fetchList,

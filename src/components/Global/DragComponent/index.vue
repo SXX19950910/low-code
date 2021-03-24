@@ -21,11 +21,13 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import buttonDrawer from '@/components/Maps/ButtonDrawer/index.vue'
+import webNav from '@/components/Maps/WebNav/index.vue'
 import _ from 'loadsh'
 
 export default {
   components: {
-    buttonDrawer
+    buttonDrawer,
+    webNav
   },
   props: {
     elementId: {
@@ -59,7 +61,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      deleteFormItem: 'DELETE_FORM_ITEM',
+      deleteComponent: 'DELETE_COMPONENT',
       setCurrentFormItem: 'SET_CURRENT_FORM_ITEM',
       copyFormItem: 'COPY_FORM_ITEM'
     }),
@@ -68,7 +70,7 @@ export default {
     },
     handleDeleteField() {
       this.setCurrentFormItem('')
-      this.deleteFormItem(this.field.elementId)
+      this.deleteComponent(this.field.elementId)
     },
     handleCopyField() {
       const field = $component.updateFormItemId(_.cloneDeep(this.field))

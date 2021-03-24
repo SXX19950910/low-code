@@ -49,7 +49,7 @@ export function parseStyles(styles, props) {
     width,
     height
   } = styles
-  const { backgroundType, borderRadiusType, borderType, boxShadowType } = props
+  const { backgroundType = '', borderRadiusType, borderType, boxShadowType } = props
   const result = {
     marginTop: isNaN(marginTop) ? marginTop : `${marginTop}px`,
     marginBottom: isNaN(marginBottom) ? marginBottom : `${marginBottom}px`,

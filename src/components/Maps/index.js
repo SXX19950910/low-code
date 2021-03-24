@@ -7,10 +7,8 @@
  */
 import buttonDrawer from './ButtonDrawer'
 import webNav from './WebNav'
-import dateArea from './DateArea';
 
 export default [
     buttonDrawer,
-    webNav,
-    dateArea
+    webNav
 ]

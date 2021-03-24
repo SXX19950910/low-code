@@ -1,11 +1,11 @@
 <template>
   <div class="scm-nav-warp" :style="styles">
     <div class="left-area">
-      <set-component v-for="item in data.field.children" :key="item.elementId" :data="item" />
+      <draggable-box :data="data"></draggable-box>
     </div>
     <div class="right-area">
       <div class="menu-list">
-        <div v-for="item in data.field.options" :key="item.value" :class="item.label === current ? 'current' : ''" class="item" @click="handleClick(item.label)">
+        <div v-for="item in data.field.options" :key="item.value" :class="item.label === active ? 'current' : ''" class="item" @click="handleClick(item.label)">
           <i :class="item.value" class="menu-icon" />
           <span class="menu-name">{{ item.label }}</span>
           <div class="line" />
@@ -29,17 +29,17 @@ export default {
   },
   data() {
     return {
-      current: ''
+      active: ''
     }
   },
   computed: {
     styles() {
-      return {}
+      return this.parseStyles(this.data.field.styles, this.data.field.props)
     }
   },
   methods: {
     handleClick(item) {
-      this.current = item
+      this.active = item
     }
   }
 }
@@ -48,13 +48,12 @@ export default {
 <style lang="scss">
 .scm-nav-warp {
   display: flex;
-  align-items: center;
-  height: 68px;
   background-color: rgba(255, 255, 255, 0.6);
   box-shadow: rgba(0,0,0,0.1) 1px 2px 3px;
   position: relative;
   z-index: 1;
   justify-content: space-between;
+  height: 68px;
   .left-area {
     min-width: 36%;
     flex-shrink: 0;

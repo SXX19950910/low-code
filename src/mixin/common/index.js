@@ -6,7 +6,8 @@
  * @description：index
  * @update: 2021-03-16 17:44
  */
-import { mapGetters } from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
+import { parseStyles } from '@/utils/style'
 
 export default {
     install(Vue) {
@@ -18,11 +19,42 @@ export default {
                 }
             },
             computed: {
-                ...mapGetters(['designForm', 'currentFormItem'])
+                ...mapGetters(['designForm', 'currentFormItem', 'collection']),
+                current() {
+                    const { elementId = '' } = this.currentFormItem
+                    let result
+                    const hasChild = data => data.field ? data.field.children.length > 0 : data.children.length > 0
+                    const findChildren = (children) => {
+                        children.map(item => {
+                            if (item.elementId === elementId) result = item
+                            else if (hasChild(item)) {
+                                findChildren(item.field ? item.field.children : item.children)
+                            }
+                        })
+                    }
+                    this.designForm.map(item => {
+                        if (item.elementId === elementId) {
+                            result = item
+                        } else if (item.field.children.length > 0) {
+                            findChildren(item.field.children)
+                        }
+                    })
+                    return result
+                },
+                dragOptions() {
+                    return {
+                        animation: 200,
+                        group: 'component',
+                        handle: '.move-bar'
+                    }
+                }
             },
             methods: {
-                getBindProps(current) {
-                    console.log(current)
+                ...mapMutations({
+                    insertComponent: 'INSERT_COMPONENT'
+                }),
+                parseStyles(style, props) {
+                    return parseStyles(style, props)
                 }
             }
         })

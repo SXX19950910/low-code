@@ -8,15 +8,17 @@
 
 import setComponent from './SetComponent'
 import dragComponent from './DragComponent'
+import draggableBox from './DraggableBox'
 import menuOptions from '@/public/MenuOptions'
 import draggable from 'vuedraggable'
 
 export default [
-    setComponent,
-    dragComponent,
     {
         name: 'draggable',
         component: draggable
     },
+    setComponent,
+    dragComponent,
+    draggableBox,
     ...menuOptions
 ]

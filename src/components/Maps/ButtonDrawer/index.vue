@@ -9,16 +9,14 @@
         :round="data.field.props.round"
         :circle="data.field.props.circle"
         :type="data.field.props.type"
-        @click="handleToggleDrawer"
+        @click.stop="handleToggleDrawer"
     >
       {{ data.field.name }} <i class="el-icon-d-arrow-left fs-14" :class="iconClass" />
     </el-button>
-    <el-collapse-transition v-if="isDev">
+    <el-collapse-transition>
       <div v-show="drawerVisible" class="drawer-area" :class="drawerClass">
         <div class="place-box" />
-        <draggable v-model="data.field.children" v-bind="dragOptions" class="field-box" :data-parent="data.elementId">
-          <drag-component v-for="item in data.field.children" :key="item.elementId" :field="item" :element-id="item.elementId" />
-        </draggable>
+        <draggable-box class="field-box" :data="data"></draggable-box>
       </div>
     </el-collapse-transition>
   </div>

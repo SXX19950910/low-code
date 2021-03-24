@@ -11,6 +11,7 @@ import dataOptions from './Data'
 import pageOptions from './Page'
 import styleOptions from './Style'
 import pageStyle from './PageStyle'
+import webNavOptions from './WebNav'
 
 export default [
     {
@@ -36,5 +37,9 @@ export default [
     {
         name: 'page-style',
         component: pageStyle
+    },
+    {
+        name: 'web-nav-options',
+        component: webNavOptions
     }
 ]

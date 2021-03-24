@@ -14,7 +14,7 @@ export default {
     active: true,
     icon: 'iconfont iconchouti',
     menuName: 'button-drawer-options',
-    component: () => import('./index'),
+    component: () => import('./index.vue'),
     field: $component.mergeCommon({
         icon: 'iconfont iconchouti',
         name: '按钮抽屉',

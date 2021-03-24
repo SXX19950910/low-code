@@ -12,6 +12,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 
+console.log(components)
 // 注册全局组件
 components.map(item => Vue.component(item.name, item.component))
 // 注册ElementUi

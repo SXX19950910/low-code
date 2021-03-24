@@ -67,7 +67,7 @@
       </div>
       <div v-if="placeVisible" class="fq-tip">
         <img src="@/assets/images/design.png" alt="png">
-        <p>请将左侧字段拖入此处</p>
+        <p>请将左侧组件拖入此处</p>
       </div>
       <draggable v-model="$store.state.lowCode.form" tag="div" class="middle-form-content" :style="warpStyles" :class="boardClass" v-bind="middleDragOptions" @add="onFieldAdd" @click.native.stop="handleSelectPage">
         <drag-component v-for="item in $store.state.lowCode.form" :ref="item.elementId" :key="item.elementId" :element-id="item.elementId" :field="item" :active="item.active" @delete="onDelete" is-dev />
@@ -161,7 +161,6 @@ export default {
       componentList: [],
       originalList: [],
       drawerVisible: true,
-      current: {},
       currentId: '',
       formKey: '',
       downField: {},
@@ -221,7 +220,6 @@ export default {
   },
   methods: {
     ...mapMutations({
-      addFormItem: 'ADD_FORM_ITEM',
       setCurrentFormItem: 'SET_CURRENT_FORM_ITEM',
       clearForm: 'CLEAR_FORM',
       initForm: 'INIT_FORM'
@@ -334,12 +332,9 @@ export default {
       const field = _.cloneDeep(this.collection.find(item => item.id === id))
       const newField = formatFormItem(field)
       newField.parentId = null
-      const formItem = {
-        index: newIndex,
-        field: newField
-      }
-      console.log(formItem)
-      this.addFormItem(formItem)
+      newField.index = newIndex
+      console.log(newField)
+      this.insertComponent(newField)
     },
     handleSelectPage() {
       const page = {
@@ -348,17 +343,6 @@ export default {
         field: {}
       }
       this.setCurrentFormItem(page)
-    },
-    onFieldChange(form) {
-      this.form.map(item => {
-        const elementId = item.elementId
-        if (this.current.elementId === elementId) {
-          for (const key in item.field) {
-            if (item.field.hasOwnProperty(key)) item.field[key] = form[key]
-          }
-          this.$refs[elementId][0].init()
-        }
-      })
     },
     onDelete({ id }) {
       this.form.map((item, index) => {
