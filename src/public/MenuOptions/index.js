@@ -12,6 +12,7 @@ import pageOptions from './Page'
 import styleOptions from './Style'
 import pageStyle from './PageStyle'
 import webNavOptions from './WebNav'
+import gridOptions from './Grid'
 
 export default [
     {
@@ -41,5 +42,9 @@ export default [
     {
         name: 'web-nav-options',
         component: webNavOptions
+    },
+    {
+        name: 'grid-options',
+        component: gridOptions
     }
 ]

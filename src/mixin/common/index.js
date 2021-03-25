@@ -40,19 +40,14 @@ export default {
                         }
                     })
                     return result
-                },
-                dragOptions() {
-                    return {
-                        animation: 200,
-                        group: 'component',
-                        handle: '.move-bar'
-                    }
                 }
             },
             methods: {
                 ...mapMutations({
                     insertComponent: 'INSERT_COMPONENT',
-                    setCurrentComponent: 'SET_CURRENT_COMPONENT'
+                    setCurrentComponent: 'SET_CURRENT_COMPONENT',
+                    deleteComponent: 'DELETE_COMPONENT',
+                    copyFormItem: 'COPY_FORM_ITEM'
                 }),
                 parseStyles(style, props) {
                     return parseStyles(style, props)

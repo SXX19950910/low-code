@@ -6,6 +6,7 @@ import ElementUI from 'element-ui'
 import components from './components/Global/index'
 import directives from '@/directive'
 import mixin from '@/mixin/common'
+import 'default-passive-events'
 // 使用iconfont
 import './icons/iconfont.css'
 import 'element-ui/lib/theme-chalk/index.css'

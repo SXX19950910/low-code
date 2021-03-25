@@ -69,8 +69,8 @@
         <img src="@/assets/images/design.png" alt="png">
         <p>请将左侧组件拖入此处</p>
       </div>
-      <draggable v-model="$store.state.lowCode.form" tag="div" class="middle-form-content" :style="warpStyles" :class="boardClass" v-bind="middleDragOptions" @add="onFieldAdd" @click.native.stop="handleSelectPage">
-        <drag-component v-for="item in $store.state.lowCode.form" :ref="item.elementId" :key="item.elementId" :element-id="item.elementId" :field="item" :active="item.active" @delete="onDelete" is-dev />
+      <draggable v-model="$store.state.lowCode.form" tag="div" class="middle-form-content" :style="warpStyles" :class="boardClass" group="component" handle=".move-bar" :animation="0" @add="onFieldAdd" @click.native.stop="handleSelectPage">
+        <drag-component v-for="(component) in $store.state.lowCode.form" :ref="component.elementId" :key="component.elementId" :element-id="component.elementId" :field="component" :active="component.active" @delete="onDelete" />
       </draggable>
     </div>
     <div class="right-options-warp">
@@ -220,7 +220,6 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrentFormItem: 'SET_CURRENT_FORM_ITEM',
       clearForm: 'CLEAR_FORM',
       initForm: 'INIT_FORM'
     }),
@@ -342,7 +341,7 @@ export default {
         elementId: 'page',
         field: {}
       }
-      this.setCurrentFormItem(page)
+      this.setCurrentComponent(page)
     },
     onDelete({ id }) {
       this.form.map((item, index) => {

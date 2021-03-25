@@ -1,11 +1,12 @@
 <template>
-  <el-row class="grid-warp" tag="el-row" v-bind="dragOptions" :style="styles" :justify="data.field.props.justify" :gutter="data.field.props.gutter" :align="data.field.props.align" type="flex" @click.native.stop="onClick">
+  <el-row class="grid-warp" tag="el-row" :style="styles" :justify="data.field.props.justify" :gutter="data.field.props.gutter" :align="data.field.props.align" type="flex" @click.native.stop="onClick">
     <draggable-box
         v-for="(component, index) in data.field.children"
         :key="index"
         :data="component"
         :component-data="getColComponentData(component)"
         tag="el-col"
+        class="grid-drag-area"
     >
     </draggable-box>
   </el-row>
@@ -50,6 +51,10 @@ export default {
 
 <style lang="scss">
 .grid-warp {
+  height: 60px;
+  .grid-drag-area {
+    position: relative;
+  }
   .filed-box {
     min-height: 60px;
     position: relative;

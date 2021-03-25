@@ -1,16 +1,14 @@
 <template>
-  <draggable v-model="data.field.children" v-bind="dragOptions" :tag="tag" class="draggable-wrap" :component-data="componentData" :class="data.field.children.length < 1 ? 'no-field' : ''" :data-parent="data.elementId" @add="onAdd">
+  <draggable v-model="data.field.children" :animation="200" group="component" handle=".move-bar" :tag="tag" class="draggable-wrap" :component-data="componentData" :class="data.field.children.length < 1 ? 'no-field' : ''" :data-parent="data.elementId" @add="onAdd">
     <drag-component v-for="(component) in data.field.children" :key="component.elementId" :field="component" :element-id="component.elementId" />
   </draggable>
 </template>
 
 <script>
 import { formatFormItem, removeAllNonItem } from '@/utils/global'
-import draggable from 'vuedraggable'
 import _ from 'loadsh'
 export default {
   components: {
-    draggable
   },
   props: {
     data: {

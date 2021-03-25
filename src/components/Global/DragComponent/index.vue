@@ -14,12 +14,11 @@
     <div class="bottom-tools">
       <div class="name item">{{ field.type }}</div>
     </div>
-    <component :is="field.type" ref="item" :data="field" is-dev />
+    <component :is="field.type" ref="item" :data="field" />
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
 import buttonDrawer from '@/components/Maps/ButtonDrawer/index.vue'
 import webNav from '@/components/Maps/WebNav/index.vue'
 import grid from '@/components/Maps/Grid/index.vue'
@@ -52,7 +51,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentFormItem', 'collection']),
     warpClass() {
       const result = []
       if (this.currentFormItem.elementId === this.field.elementId) result.push('active')
@@ -62,16 +60,11 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({
-      deleteComponent: 'DELETE_COMPONENT',
-      setCurrentFormItem: 'SET_CURRENT_FORM_ITEM',
-      copyFormItem: 'COPY_FORM_ITEM'
-    }),
     onClick() {
-      this.setCurrentFormItem(this.field)
+      this.setCurrentComponent(this.field)
     },
     handleDeleteField() {
-      this.setCurrentFormItem('')
+      this.setCurrentComponent('')
       this.deleteComponent(this.field.elementId)
     },
     handleCopyField() {

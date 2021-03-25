@@ -13,6 +13,7 @@
     "@ckeditor/ckeditor5-vue": "^2.0.1",
     "@ckeditor/ckeditor5-vue2": "^1.0.5",
     "core-js": "^3.6.5",
+    "default-passive-events": "^2.0.0",
     "element-ui": "^2.14.1",
     "loadsh": "^0.0.4",
     "node-sass": "^5.0.0",
