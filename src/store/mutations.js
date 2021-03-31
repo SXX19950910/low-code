@@ -1,4 +1,5 @@
 import { getTransformFun } from '@/utils/event'
+import { getWidget } from '@/utils/global'
 import Vue from 'vue'
 
 const hasChild = data => data.field ? data.field.children.length > 0 : data.children.length > 0
@@ -22,10 +23,11 @@ export default {
         res.field.children.push(field)
       })
     }
-
   },
-  ADD_FORM_ITEM(state, { field, index }) {
-    state.lowCode.form.splice(index, 0, field)
+  INSERT_GRID(state, parentId) {
+    findCall(state.lowCode.form, 'elementId', parentId, (res) => {
+      res.field.children.push(getWidget('grid', { parentId: res.elementId }))
+    })
   },
   INIT_FORM(state, { items, css }) {
     state.lowCode.form = items

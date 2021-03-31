@@ -23,7 +23,7 @@
             <el-scrollbar class="left-scroll-area">
               <div v-for="item in originalList" :key="item.title" class="classify-box">
                 <div class="sub-title">{{ item.title }}</div>
-                <div v-for="tag in item.components" :key="tag.id" :class="tag.id === currentId ? 'current' : ''" class="item none-item" :field-id="tag.id" @click="handleComponentClick(tag)">
+                <div v-for="tag in item.components" :key="tag.id" :class="tag.id === currentId ? 'current' : ''" class="item none-item" :field-type="tag.type" @click="handleComponentClick(tag)">
                   <span class="name" :title="tag.name">{{ tag.name }}</span>
                   <i class="el-icon-caret-left" />
                 </div>
@@ -33,7 +33,7 @@
               <div v-for="item in originalList" :key="item.title" class="classify-box">
                 <div class="sub-title">{{ item.title }}</div>
                 <draggable v-bind="leftDragOptions" @start="onStart">
-                  <div v-for="tag in item.components" :id="tag.id" :key="tag.id" class="item none-item" :field-id="tag.id">
+                  <div v-for="tag in item.components" :id="tag.id" :key="tag.id" class="item none-item" :field-type="tag.type">
                     <div class="top-left-title">{{ tag.name }} {{ tag.type }}</div>
                     <div class="wrapper-item">
                       <i :class="tag.icon" />
@@ -190,18 +190,9 @@ export default {
     },
     boardClass() {
       const className = []
-      if (Object.keys(this.downField).length > 0) className.push(`${this.downField.type}-board`)
+      if (this.downField && Object.keys(this.downField).length > 0) className.push(`${this.downField.type}-board`)
       if (this.currentFormItem.elementId === 'page') className.push('current')
       return className
-    },
-    middleDragOptions() {
-      return {
-        group: {
-          name: 'component'
-        },
-        handle: '.move-bar',
-        animation: 0
-      }
     },
     isPage() {
       return this.currentFormItem.type === 'page'
@@ -327,12 +318,11 @@ export default {
       const newIndex = drag.newIndex
       const isSort = drag.item.className.includes('form-drag-warp')
       if (isSort) return
-      const id = drag.item.getAttribute('field-id')
-      const field = _.cloneDeep(this.collection.find(item => item.id === id))
+      const type = drag.item.getAttribute('field-type')
+      const field = _.cloneDeep(this.collection.find(item => item.type === type))
       const newField = formatFormItem(field)
       newField.parentId = null
       newField.index = newIndex
-      console.log(newField)
       this.insertComponent(newField)
     },
     handleSelectPage() {
@@ -389,8 +379,7 @@ export default {
       document.head.appendChild(styleTag)
     },
     async getLeftComponents() {
-      const res = await this.$store.dispatch('lowCode/init')
-      this.originalList = res
+      this.originalList = await this.$store.dispatch('lowCode/init')
     },
     handleShowJsPanel() {
       this.$refs.script.init()

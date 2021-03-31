@@ -8,24 +8,24 @@
         <div class="margin-padding-area">
           <div class="margin-box">
             <div class="tip-text">margin</div>
-            <el-input v-model="currentStyles.marginTop" class="edit-ipt top" placeholder="-" maxlength="4" />
-            <el-input v-model="currentStyles.marginBottom" class="edit-ipt bottom" placeholder="-" maxlength="4"/>
-            <el-input v-model="currentStyles.marginLeft" class="edit-ipt left special" placeholder="-" maxlength="4" />
-            <el-input v-model="currentStyles.marginRight" class="edit-ipt right special" placeholder="-" maxlength="4" />
+            <el-input v-model="currentStyles.marginTop" size="small" class="edit-ipt top" placeholder="-" maxlength="4" />
+            <el-input v-model="currentStyles.marginBottom" size="small" class="edit-ipt bottom" placeholder="-" maxlength="4"/>
+            <el-input v-model="currentStyles.marginLeft" size="small" class="edit-ipt left special" placeholder="-" maxlength="4" />
+            <el-input v-model="currentStyles.marginRight" size="small" class="edit-ipt right special" placeholder="-" maxlength="4" />
             <div class="padding-box">
-              <el-input v-model="currentStyles.paddingTop" class="edit-ipt top" placeholder="-" maxlength="3" />
-              <el-input v-model="currentStyles.paddingBottom" class="edit-ipt bottom" placeholder="-" maxlength="3" />
-              <el-input v-model="currentStyles.paddingLeft" class="edit-ipt left" placeholder="-" maxlength="3" />
-              <el-input v-model="currentStyles.paddingRight" class="edit-ipt right" placeholder="-" maxlength="3" />
+              <el-input v-model="currentStyles.paddingTop" size="small" class="edit-ipt top" placeholder="-" maxlength="3" />
+              <el-input v-model="currentStyles.paddingBottom" size="small" class="edit-ipt bottom" placeholder="-" maxlength="3" />
+              <el-input v-model="currentStyles.paddingLeft" size="small" class="edit-ipt left" placeholder="-" maxlength="3" />
+              <el-input v-model="currentStyles.paddingRight" size="small" class="edit-ipt right" placeholder="-" maxlength="3" />
               <div class="place-box"></div>
               <div class="text-tip">padding</div>
             </div>
           </div>
           <el-form-item class="mt-10" label="宽度">
-            <el-input v-model="currentStyles.width" type="text" placeholder="宽度" />
+            <el-input v-model="currentStyles.width" size="small" type="text" placeholder="宽度" />
           </el-form-item>
           <el-form-item label="高度">
-            <el-input v-model="currentStyles.height" type="text" placeholder="高度" />
+            <el-input v-model="currentStyles.height" size="small" type="text" placeholder="高度" />
           </el-form-item>
         </div>
         <el-form-item class="mt-10" label="布局模式">
@@ -75,20 +75,20 @@
       <el-collapse-item title="文字" name="font">
         <div class="split-area">
           <el-form-item label="字号">
-            <el-input-number v-model="currentStyles.fontSize" class="w-100" />
+            <el-input-number v-model="currentStyles.fontSize" size="small" class="w-100" />
           </el-form-item>
           <el-form-item label="粗细">
-            <el-select v-model="currentStyles.fontWeight" class="w-100">
+            <el-select v-model="currentStyles.fontWeight" size="small" class="w-100">
               <el-option v-for="item in fontWeightOptions" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
           </el-form-item>
         </div>
         <div class="split-area">
           <el-form-item label="行距">
-            <el-input v-model="currentStyles.lineHeight" class="w-100" />
+            <el-input v-model="currentStyles.lineHeight" size="small" class="w-100" />
           </el-form-item>
           <el-form-item label="颜色">
-            <el-color-picker class="color-picker" v-model="currentStyles.color"></el-color-picker>
+            <el-color-picker class="color-picker" v-model="currentStyles.color" size="small"></el-color-picker>
           </el-form-item>
         </div>
         <el-form-item label="对齐方式">
@@ -101,7 +101,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="透明度">
-          <el-slider v-model="currentStyles.opacity" :format-tooltip="formatTooltip"></el-slider>
+          <el-slider v-model="currentStyles.opacity" :format-tooltip="formatTooltip" size="small"></el-slider>
         </el-form-item>
       </el-collapse-item>
       <el-collapse-item title="定位" name="position">
@@ -124,23 +124,23 @@
         <template v-if="isPosition">
           <div class="split-area">
             <el-form-item label="上">
-              <el-input-number v-model="currentStyles.top" class="w-100" />
+              <el-input-number v-model="currentStyles.top" size="small" class="w-100" />
             </el-form-item>
             <el-form-item label="下">
-              <el-input-number v-model="currentStyles.bottom" class="w-100" />
+              <el-input-number v-model="currentStyles.bottom" size="small" class="w-100" />
             </el-form-item>
           </div>
           <div class="split-area">
             <el-form-item label="左">
-              <el-input-number v-model="currentStyles.left" class="w-100" />
+              <el-input-number v-model="currentStyles.left" size="small" class="w-100" />
             </el-form-item>
             <el-form-item label="右">
-              <el-input-number v-model="currentStyles.right" class="w-100" />
+              <el-input-number v-model="currentStyles.right" size="small" class="w-100" />
             </el-form-item>
           </div>
         </template>
         <el-form-item label="层叠顺序">
-          <el-input-number v-model="currentStyles.zIndex" class="w-100" />
+          <el-input-number v-model="currentStyles.zIndex" size="small" class="w-100" />
         </el-form-item>
         <el-form-item label="浮动">
           <el-radio-group v-model="currentStyles.clear" size="mini">
@@ -162,12 +162,12 @@
         </el-form-item>
         <template v-if="isBackgroundColor">
           <el-form-item label="颜色">
-            <el-color-picker class="color-picker" v-model="currentStyles.backgroundColor"></el-color-picker>
+            <el-color-picker class="color-picker" v-model="currentStyles.backgroundColor" size="small"></el-color-picker>
           </el-form-item>
         </template>
         <template v-if="isBackgroundImg">
           <el-form-item label="图片地址">
-            <el-input v-model="currentStyles.backgroundImage" placeholder="图片地址" type="text" />
+            <el-input v-model="currentStyles.backgroundImage" size="small" placeholder="图片地址" type="text" />
           </el-form-item>
           <el-form-item label="尺寸">
             <el-radio-group v-model="currentStyles.backgroundSize" size="small">
@@ -193,10 +193,10 @@
             </el-form-item>
             <div class="spe-div">
               <el-form-item label="X">
-                <el-input v-model="currentStyles.backgroundPositionX" type="text" />
+                <el-input v-model="currentStyles.backgroundPositionX" size="small" type="text" />
               </el-form-item>
               <el-form-item label="Y">
-                <el-input v-model="currentStyles.backgroundPositionY" type="text" />
+                <el-input v-model="currentStyles.backgroundPositionY" size="small" type="text" />
               </el-form-item>
             </div>
           </div>
@@ -223,18 +223,18 @@
         <template v-if="isCustomRadius">
           <div class="split-area">
             <el-form-item label="左上角">
-              <el-input-number v-model="currentStyles.borderTopLeftRadius" />
+              <el-input-number v-model="currentStyles.borderTopLeftRadius" size="small" />
             </el-form-item>
             <el-form-item label="右上角">
-              <el-input-number v-model="currentStyles.borderTopRightRadius" />
+              <el-input-number v-model="currentStyles.borderTopRightRadius" size="small" />
             </el-form-item>
           </div>
           <div class="split-area">
             <el-form-item label="左下角">
-              <el-input-number v-model="currentStyles.borderBottomLeftRadius" />
+              <el-input-number v-model="currentStyles.borderBottomLeftRadius" size="small" />
             </el-form-item>
             <el-form-item label="右下角">
-              <el-input-number v-model="currentStyles.borderBottomRightRadius" />
+              <el-input-number v-model="currentStyles.borderBottomRightRadius" size="small" />
             </el-form-item>
           </div>
         </template>
@@ -248,10 +248,10 @@
           </el-form-item>
           <div class="spe-div">
             <el-form-item label="宽度">
-              <el-input-number v-model="currentStyles.borderWidth" type="text" />
+              <el-input-number v-model="currentStyles.borderWidth" size="small" type="text" />
             </el-form-item>
             <el-form-item label="颜色">
-              <el-color-picker v-model="currentStyles.borderColor" class="color-picker" />
+              <el-color-picker v-model="currentStyles.borderColor" size="small" class="color-picker" />
             </el-form-item>
           </div>
         </div>
@@ -275,18 +275,18 @@
         </el-form-item>
         <div class="split-area">
           <el-form-item label="x">
-            <el-input-number v-model="currentStyles.boxShadowX" />
+            <el-input-number v-model="currentStyles.boxShadowX" size="small" />
           </el-form-item>
           <el-form-item label="y">
-            <el-input-number v-model="currentStyles.boxShadowY" />
+            <el-input-number v-model="currentStyles.boxShadowY" size="small" />
           </el-form-item>
         </div>
         <div class="split-area">
           <el-form-item label="模糊">
-            <el-input-number v-model="currentStyles.boxShadowBlur" />
+            <el-input-number v-model="currentStyles.boxShadowBlur" size="small" />
           </el-form-item>
           <el-form-item label="扩展">
-            <el-input-number v-model="currentStyles.boxShadowExtend" />
+            <el-input-number v-model="currentStyles.boxShadowExtend" size="small" />
           </el-form-item>
         </div>
       </el-collapse-item>
@@ -746,7 +746,7 @@ export default {
           icon: 'iconfont iconneiliankuaibuju'
         },
         {
-          label: '内联块',
+          label: '隐藏',
           value: 'none',
           icon: 'iconfont iconchakan'
         }

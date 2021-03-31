@@ -7,14 +7,12 @@
  */
 
 export default {
-    id: 'kmbeouy51',
     name: '栅格布局',
     classify: 'layout',
     type: 'grid',
     active: true,
     icon: 'iconfont icon35zhage',
     menuName: 'grid-options',
-    component: () => import('./index.vue'),
     field: $component.mergeCommon({
         icon: 'iconfont icon35zhage',
         name: '栅格布局',

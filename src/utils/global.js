@@ -161,15 +161,16 @@ export function formatFormItem(field) {
   const newField = _.cloneDeep(field)
   const paramsKey = newField.field.paramsKey
   const type = newField.field.type
+  newField.id = generateId()
   newField.elementId = generateId()
+  newField.field.eventOptions = getFormItemEventsOptions(type)
+  newField.field.paramsKey = paramsKey || `${newField.elementId}_${type}`
   newField.field.props = {}
   newField.field.styles = {}
-  newField.field.eventOptions = getFormItemEventsOptions(type)
   newField.field.events = []
   newField.field.value = ''
   newField.field.arrValue = []
   newField.field.parentId = ''
-  newField.field.paramsKey = paramsKey || `${newField.elementId}_${type}`
   newField.field.rule = {
     attrName: '',
     desc: '',
@@ -401,12 +402,8 @@ export function formatFormItem(field) {
     }
 
   ]
-  const stylesKeyMap = []
   propsKeyMap.map(item => {
     newField.field.props[item.key] = item.value
-  })
-  stylesKeyMap.map(item => {
-    newField.field.styles[item.key] = item.value
   })
   return newField
 }
@@ -416,4 +413,25 @@ export function removeAllNonItem() {
   $list.forEach(item => {
     item.remove()
   })
+}
+
+export function getWidget(type, props) {
+  let context
+  switch (type) {
+    case 'grid':
+      context = _.assign({
+        icon: 'iconfont icon42danlanbuju',
+        label: '单栏',
+        parentId: '',
+        span: 12,
+        elementId: generateId(),
+        field: {
+          props: {},
+          styles: {},
+          children: []
+        }
+      }, props)
+      break
+  }
+  return context
 }

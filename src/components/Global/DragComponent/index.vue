@@ -1,5 +1,5 @@
 <template>
-  <div class="form-drag-warp" :class="warpClass" @click.stop="onClick">
+  <div class="form-drag-warp" :class="warpClass" :style="styles" @click.stop="onClick">
     <div class="right-tools">
       <div class="move-bar item">
         <i class="el-icon-rank" />
@@ -22,13 +22,16 @@
 import buttonDrawer from '@/components/Maps/ButtonDrawer/index.vue'
 import webNav from '@/components/Maps/WebNav/index.vue'
 import grid from '@/components/Maps/Grid/index.vue'
-import _ from 'loadsh'
+import container from '@/components/Maps/Container/index.vue'
+import customButton from '@/components/Maps/CustomButton/index.vue'
 
 export default {
   components: {
     buttonDrawer,
     webNav,
-    grid
+    grid,
+    container,
+    customButton
   },
   props: {
     elementId: {
@@ -57,6 +60,9 @@ export default {
       if (this.field.field.visible === false) result.push('hide-drag')
       result.push(`${this.field.type}`)
       return result
+    },
+    styles() {
+      return this.parseStyles(this.field.field.styles, this.field.field.props)
     }
   },
   methods: {
@@ -68,18 +74,9 @@ export default {
       this.deleteComponent(this.field.elementId)
     },
     handleCopyField() {
-      const field = $component.updateFormItemId(_.cloneDeep(this.field))
-      const data = {
-        elementId: this.field.elementId,
-        field
-      }
-      this.copyFormItem(data)
     },
     init() {
       this.$refs.item.init()
-    },
-    onAddGridField(id, elementId) {
-      this.$emit('add-grid-field', id, elementId)
     }
   }
 }

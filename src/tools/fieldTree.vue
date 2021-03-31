@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -30,7 +30,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['designFormTree', 'currentFormItem'])
+    ...mapGetters(['designFormTree'])
   },
   watch: {
     'currentFormItem'(value) {
@@ -40,11 +40,8 @@ export default {
   mounted() {
   },
   methods: {
-    ...mapMutations({
-      setCurrentFormItem: 'SET_CURRENT_FORM_ITEM'
-    }),
     handleNodeClick(data) {
-      this.setCurrentFormItem(data)
+      this.setCurrentComponent(data)
     }
   }
 }

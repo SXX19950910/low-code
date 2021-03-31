@@ -13,6 +13,8 @@ import styleOptions from './Style'
 import pageStyle from './PageStyle'
 import webNavOptions from './WebNav'
 import gridOptions from './Grid'
+import containerOptions from './Container'
+import customButtonOptions from './CustomButton'
 
 export default [
     {
@@ -46,5 +48,13 @@ export default [
     {
         name: 'grid-options',
         component: gridOptions
+    },
+    {
+        name: 'container-options',
+        component: containerOptions
+    },
+    {
+        name: 'custom-button-options',
+        component: customButtonOptions
     }
 ]

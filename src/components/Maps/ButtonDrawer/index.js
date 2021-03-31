@@ -7,14 +7,12 @@
  */
 
 export default {
-    id: 'kmbeouy50',
     name: '按钮抽屉',
     classify: 'advanced',
     type: 'buttonDrawer',
     active: true,
     icon: 'iconfont iconchouti',
     menuName: 'button-drawer-options',
-    component: () => import('./index.vue'),
     field: $component.mergeCommon({
         icon: 'iconfont iconchouti',
         name: '按钮抽屉',

@@ -6,7 +6,7 @@
     <el-collapse>
       <el-collapse-item title="基础">
         <el-form-item label="页面Class">
-          <el-input />
+          <el-input size="small"/>
         </el-form-item>
       </el-collapse-item>
       <el-collapse-item title="高级">

@@ -37,23 +37,23 @@
           <div class="body-sub">
             <div class="item">
               <div class="name">浅色模式</div>
-              <el-checkbox v-model="current.field.props.plain" />
+              <el-checkbox v-model="current.field.props.plain" size="small" />
             </div>
             <div class="item">
               <div class="name">圆形</div>
-              <el-checkbox v-model="current.field.props.circle" />
+              <el-checkbox v-model="current.field.props.circle" size="small" />
             </div>
             <div class="item">
               <div class="name">圆角</div>
-              <el-checkbox v-model="current.field.props.round" />
+              <el-checkbox v-model="current.field.props.round" size="small" />
             </div>
             <div class="item">
               <div class="name">禁用</div>
-              <el-checkbox v-model="current.field.props.disabled" />
+              <el-checkbox v-model="current.field.props.disabled" size="small" />
             </div>
             <div class="item">
               <div class="name">显示字段</div>
-              <el-checkbox v-model="current.field.visible" />
+              <el-checkbox v-model="current.field.visible" size="small" />
             </div>
           </div>
         </div>
@@ -64,8 +64,6 @@
 
 <script>
 export default {
-  components: {
-  },
   data() {
     return {
       isEditOption: false,
@@ -120,11 +118,7 @@ export default {
     }
   },
   computed: {
-    dragOptions() {
-      return {
-        animation: 200
-      }
-    }
+
   },
   methods: {
   }

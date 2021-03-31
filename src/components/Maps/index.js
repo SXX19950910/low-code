@@ -5,12 +5,17 @@
  * @description：index
  * @update: 2021-03-16 11:09
  */
+
 import buttonDrawer from './ButtonDrawer'
 import webNav from './WebNav'
 import grid from './Grid'
+import container from './Container'
+import customButton from './CustomButton'
 
 export default [
     buttonDrawer,
     webNav,
-    grid
+    grid,
+    container,
+    customButton
 ]

@@ -7,9 +7,7 @@
  */
 
 export default {
-    id: 'kmbeouy650',
     name: '导航栏',
-    component: () => import('./index'),
     type: 'webNav',
     classify: 'web',
     active: true,

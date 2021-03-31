@@ -75,9 +75,6 @@ const actions = {
 const mutations = {
   SET_COLLECTION(state, data) {
     state.collection = data
-  },
-  SET_RULES(state, data) {
-    state.rules = data
   }
 }
 

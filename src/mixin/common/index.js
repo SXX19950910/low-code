@@ -47,7 +47,8 @@ export default {
                     insertComponent: 'INSERT_COMPONENT',
                     setCurrentComponent: 'SET_CURRENT_COMPONENT',
                     deleteComponent: 'DELETE_COMPONENT',
-                    copyFormItem: 'COPY_FORM_ITEM'
+                    copyFormItem: 'COPY_FORM_ITEM',
+                    insertGrid: 'INSERT_GRID'
                 }),
                 parseStyles(style, props) {
                     return parseStyles(style, props)

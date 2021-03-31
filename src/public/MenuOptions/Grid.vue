@@ -23,11 +23,11 @@
         </el-form-item>
         <el-form-item label="列设置">
           <div class="column-area">
-            <draggable v-model="current.field.children" :animation="200" ground=".component" handle=".move-bar">
+            <draggable v-model="current.field.children" :animation="200" ground="grid" handle=".move-btn">
               <div v-for="(item, index) in current.field.children" :key="index" class="col-item">
-                <el-input-number v-model="item.span" :max="24" />
-                <el-button class="remove-btn" type="primary" plain icon="el-icon-delete" circle @click="handleDeleteCol(item)" />
-                <el-button class="move-btn" plain icon="el-icon-rank" circle />
+                <el-input-number v-model="item.span" size="small" :max="24" />
+                <el-button class="remove-btn" size="small" type="primary" plain icon="el-icon-delete" circle @click="handleDeleteCol(item)" />
+                <el-button class="move-btn" size="small" plain icon="el-icon-rank" circle />
               </div>
             </draggable>
           </div>
@@ -115,10 +115,10 @@ export default {
   },
   methods: {
     handleAddFormItem() {
+      this.insertGrid(this.current.elementId)
     },
-    init() {
-    },
-    handleDeleteCol(grid) {
+    handleDeleteCol({ elementId }) {
+      this.deleteComponent(elementId)
     }
   }
 }
