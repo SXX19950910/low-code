@@ -13,7 +13,7 @@
     >
       <span slot-scope="{ node, data }" class="custom-tree-node">
         <span :class="data.icon" />
-        <span class="ml-20 fs-12 info-color">{{ node.label || data.parentId }}</span>
+        <span class="ml-20 fs-12 info-color">{{ data.name || data.parentId }}</span>
       </span>
     </el-tree>
   </div>
@@ -34,6 +34,7 @@ export default {
   },
   watch: {
     'currentFormItem'(value) {
+      console.log(this.designFormTree)
       this.$refs.tree.setCurrentKey(value.elementId)
     }
   },

@@ -15,6 +15,7 @@ import webNavOptions from './WebNav'
 import gridOptions from './Grid'
 import containerOptions from './Container'
 import customButtonOptions from './CustomButton'
+import datePickerOptions from './DatePicker'
 
 export default [
     {
@@ -56,5 +57,9 @@ export default [
     {
         name: 'custom-button-options',
         component: customButtonOptions
+    },
+    {
+        name: 'date-picker-options',
+        component: datePickerOptions
     }
 ]

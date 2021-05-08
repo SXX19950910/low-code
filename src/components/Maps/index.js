@@ -11,11 +11,13 @@ import webNav from './WebNav'
 import grid from './Grid'
 import container from './Container'
 import customButton from './CustomButton'
+import datePicker from './DatePicker'
 
 export default [
     buttonDrawer,
     webNav,
     grid,
     container,
-    customButton
+    customButton,
+    datePicker
 ]

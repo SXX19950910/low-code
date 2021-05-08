@@ -24,6 +24,7 @@ import webNav from '@/components/Maps/WebNav/index.vue'
 import grid from '@/components/Maps/Grid/index.vue'
 import container from '@/components/Maps/Container/index.vue'
 import customButton from '@/components/Maps/CustomButton/index.vue'
+import datePicker from '@/components/Maps/DatePicker/index.vue'
 
 export default {
   components: {
@@ -31,7 +32,8 @@ export default {
     webNav,
     grid,
     container,
-    customButton
+    customButton,
+    datePicker
   },
   props: {
     elementId: {

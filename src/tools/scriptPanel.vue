@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ylDrawer from '@/components/Drawer'
+import ylDrawer from '@/components/DragDrawer'
 import { debounce } from 'throttle-debounce'
 import { mapMutations } from 'vuex'
 import { parseFuncInstance } from '@/utils/event'

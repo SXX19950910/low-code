@@ -397,8 +397,7 @@ export default {
   border-bottom: 1px solid $border;
   overflow: auto;
   // 左侧菜单宽328px + 右侧菜单宽300px
-  min-width: 100vw;
-  width: 100%;
+  width: 100vw;
   .left-edge-bar {
     width: 48px;
     flex-shrink: 0;
@@ -604,7 +603,7 @@ export default {
   }
   .middle-form-warp {
     width: 100%;
-    min-width: 1280px;
+    //min-width: 1000px;
     position: relative;
     .top-fun-area {
       height: 40px;
